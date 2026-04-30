@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oqtepa Lavash - Mukammal Menu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="fastfood.css">
+</head>
+<body>
+
+    <header class="bg-white border-bottom py-3 sticky-top shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="logo fw-bolder fs-3">OQTEPA <span class="text-danger">LAVASH</span></div>
+            
+            <div class="search-box d-none d-md-block flex-grow-1 mx-5">
+                <input type="text" id="searchInput" class="form-control rounded-pill bg-light border-0 py-2 px-4" placeholder="Qidiruv...">
+            </div>
+
+            <div class="d-none d-lg-flex align-items-center gap-2 me-3 text-muted" style="cursor: pointer;" onclick="changeLocation()">
+    <span class="fs-5">📍</span>
+    <div class="lh-1">
+        <small class="d-block" style="font-size: 10px;">Yetkazib berish:</small>
+        <span id="user-location" class="fw-bold text-dark" style="font-size: 14px;">Manzilni tanlang</span>
+    </div>
+</div>
+
+            <button class="btn btn-danger px-4 py-2 rounded-3 fw-bold d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#cartModal">
+                <span>🛒</span> Savat: <span id="cart-count">0</span>
+            </button>
+        </div>
+    </header>
+
+    <div id="promoCarousel" class="carousel slide container mt-4" data-bs-ride="carousel">
+        <div class="carousel-inner rounded-5 shadow-lg">
+            <div class="carousel-item active bg-danger text-white p-5 text-center">
+                <h2 class="fw-800">1+1 AKSIYASI!</h2>
+                <p>Klassik lavash oling va sovg'aga ega bo'ling.</p>
+            </div>
+            <div class="carousel-item bg-warning text-dark p-5 text-center">
+                <h2 class="fw-800">TEZKOR YETKAZISH</h2>
+                <p>30 daqiqada uyingizda bo'ladi!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row">
+            <aside class="col-lg-3 mb-4">
+                <div class="card border-0 shadow-sm rounded-4 sticky-top" style="top: 90px;">
+                    <div class="bg-danger text-white p-3 fw-bold rounded-top-4">📦 Katalog</div>
+                    <div class="list-group list-group-flush sidebar-menu">
+                        <button onclick="filterMenu('all')" class="list-group-item list-group-item-action active">Hammasi</button>
+                        <button onclick="filterMenu('setlar')" class="list-group-item list-group-item-action">Setlar</button>
+                        <button onclick="filterMenu('lavash')" class="list-group-item list-group-item-action">Lavashlar</button>
+                        <button onclick="filterMenu('burger')" class="list-group-item list-group-item-action">Burgerlar</button>
+                        <button onclick="filterMenu('hotdog')" class="list-group-item list-group-item-action">Hot-doglar</button>
+                        <button onclick="filterMenu('ichimlik')" class="list-group-item list-group-item-action">Ichimliklar</button>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="col-lg-9">
+                <h2 class="fw-bold mb-4">Bizning Menu</h2>
+                <div class="row row-cols-1 row-cols-md-3 g-4" id="product-grid">
+                    
+                    <div class="col product-item" data-category="hotdog">
+                        <div class="card h-100 shadow-sm rounded-4 product-card p-3">
+                            <div class="position-relative text-center">
+                                <span class="badge bg-danger position-absolute top-0 start-0 rounded-pill px-3">Yangi</span>
+                                <img src="img/1.png" class="img-fluid mt-3" style="height: 140px; object-fit: contain;">
+                            </div>
+                            <div class="card-body d-flex flex-column p-0 mt-3">
+                                <h6 class="fw-bold product-name">Pishloqli Hot-dog</h6>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-danger fs-5"><span class="product-price">35000</span> so'm</span>
+                                    <button onclick="addToCart(this)" class="btn btn-warning btn-sm fw-bold px-3 rounded-3">Qo'shish</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col product-item" data-category="lavash">
+                        <div class="card h-100 shadow-sm rounded-4 product-card p-3">
+                            <div class="position-relative text-center">
+                                <span class="badge bg-danger position-absolute top-0 start-0 rounded-pill px-3">1+1</span>
+                                <img src="img/2.png" class="img-fluid mt-3" style="height: 140px; object-fit: contain;">
+                            </div>
+                            <div class="card-body d-flex flex-column p-0 mt-3">
+                                <h6 class="fw-bold product-name">Klassik Lavash</h6>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-danger fs-5"><span class="product-price">28000</span> so'm</span>
+                                    <button onclick="addToCart(this)" class="btn btn-warning btn-sm fw-bold px-3 rounded-3">Qo'shish</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col product-item" data-category="lavash">
+                        <div class="card h-100 shadow-sm rounded-4 product-card p-3">
+                            <div class="text-center">
+                                <img src="img/3.jpg" class="img-fluid mt-3" style="height: 140px; object-fit: contain;">
+                            </div>
+                            <div class="card-body d-flex flex-column p-0 mt-3">
+                                <h6 class="fw-bold product-name">Tandir Lavash</h6>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-danger fs-5"><span class="product-price">34000</span> so'm</span>
+                                    <button onclick="addToCart(this)" class="btn btn-warning btn-sm fw-bold px-3 rounded-3">Qo'shish</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col product-item" data-category="burger">
+                        <div class="card h-100 shadow-sm rounded-4 product-card p-3">
+                            <div class="text-center">
+                                <img src="img/6.png" class="img-fluid mt-3" style="height: 140px; object-fit: contain;">
+                            </div>
+                            <div class="card-body d-flex flex-column p-0 mt-3">
+                                <h6 class="fw-bold product-name">Cheeseburger</h6>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-danger fs-5"><span class="product-price">32000</span> so'm</span>
+                                    <button onclick="addToCart(this)" class="btn btn-warning btn-sm fw-bold px-3 rounded-3">Qo'shish</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col product-item" data-category="burger">
+                        <div class="card h-100 shadow-sm rounded-4 product-card p-3">
+                            <div class="text-center">
+                                <img src="img/5.jpg" class="img-fluid mt-3" style="height: 140px; object-fit: contain;">
+                            </div>
+                            <div class="card-body d-flex flex-column p-0 mt-3">
+                                <h6 class="fw-bold product-name">Big Burger</h6>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-danger fs-5"><span class="product-price">45000</span> so'm</span>
+                                    <button onclick="addToCart(this)" class="btn btn-warning btn-sm fw-bold px-3 rounded-3">Qo'shish</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col product-item" data-category="setlar">
+                        <div class="card h-100 shadow-sm rounded-4 product-card p-3">
+                            <div class="text-center">
+                                <img src="img/4.png" class="img-fluid mt-3" style="height: 140px; object-fit: contain;">
+                            </div>
+                            <div class="card-body d-flex flex-column p-0 mt-3">
+                                <h6 class="fw-bold product-name">Set 2 Pita doner</h6>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-danger fs-5"><span class="product-price">55000</span> so'm</span>
+                                    <button onclick="addToCart(this)" class="btn btn-warning btn-sm fw-bold px-3 rounded-3">Qo'shish</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col product-item" data-category="setlar">
+                        <div class="card h-100 shadow-sm rounded-4 product-card p-3">
+                            <div class="text-center">
+                                <img src="img/5.jpg" class="img-fluid mt-3" style="height: 140px; object-fit: contain;">
+                            </div>
+                            <div class="card-body d-flex flex-column p-0 mt-3">
+                                <h6 class="fw-bold product-name">Big donar juftligi</h6>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-danger fs-5"><span class="product-price">65000</span> so'm</span>
+                                    <button onclick="addToCart(this)" class="btn btn-warning btn-sm fw-bold px-3 rounded-3">Qo'shish</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col product-item" data-category="setlar">
+                        <div class="card h-100 shadow-sm rounded-4 product-card p-3">
+                            <div class="text-center">
+                                <img src="img/6.png" class="img-fluid mt-3" style="height: 140px; object-fit: contain;">
+                            </div>
+                            <div class="card-body d-flex flex-column p-0 mt-3">
+                                <h6 class="fw-bold product-name">Set 3 Oqtepa burger</h6>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-danger fs-5"><span class="product-price">55000</span> so'm</span>
+                                    <button onclick="addToCart(this)" class="btn btn-warning btn-sm fw-bold px-3 rounded-3">Qo'shish</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col product-item" data-category="ichimlik">
+                        <div class="card h-100 shadow-sm rounded-4 product-card p-3">
+                            <div class="text-center">
+                                <img src="img/8.png" class="img-fluid mt-3" style="height: 140px; object-fit: contain;">
+                            </div>
+                            <div class="card-body d-flex flex-column p-0 mt-3">
+                                <h6 class="fw-bold product-name">Mohito klassik</h6>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-danger fs-5"><span class="product-price">20000</span> so'm</span>
+                                    <button onclick="addToCart(this)" class="btn btn-warning btn-sm fw-bold px-3 rounded-3">Qo'shish</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col product-item" data-category="ichimlik">
+                        <div class="card h-100 shadow-sm rounded-4 product-card p-3">
+                            <div class="text-center">
+                                <img src="img/9.png" class="img-fluid mt-3" style="height: 140px; object-fit: contain;">
+                            </div>
+                            <div class="card-body d-flex flex-column p-0 mt-3">
+                                <h6 class="fw-bold product-name">Mohito qulupnay</h6>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-danger fs-5"><span class="product-price">20000</span> so'm</span>
+                                    <button onclick="addToCart(this)" class="btn btn-warning btn-sm fw-bold px-3 rounded-3">Qo'shish</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0">
+                <div class="modal-header bg-danger text-white rounded-top-4">
+                    <h5 class="modal-title fw-bold">🛒 Savatingiz</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="cart-items-list">
+                    <p class="text-muted text-center py-3">Savat hozircha bo'sh</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-between bg-light">
+                    <div class="fw-bold fs-5 text-dark">Jami: <span class="text-danger" id="total-price">0</span> so'm</div>
+                    <button class="btn btn-danger px-4 fw-bold rounded-3" onclick="checkout()">Buyurtma berish</button>
+                </div>
+            </div>
+        </div>
+    </div> <div class="container mt-5">
+        <footer class="pt-5 border-top">
+            <div class="row justify-content-center mt-5">
+    <div class="col-12 text-center mb-4">
+        <h3 class="fw-bold text-dark">Bizning Sertifikatlar</h3>
+    </div>
+
+    <div class="d-flex justify-content-center gap-4 flex-wrap mb-5">
+        <div class="cert-card shadow-sm border-0 rounded-4 p-3 bg-white text-center">
+            <div class="cert-img-container mb-3">
+                <img src="img/Halal.jpg" alt="Halal Sertifikati">
+            </div>
+            <div class="cert-body">
+                <h6 class="fw-bold text-dark mb-1">Halol</h6>
+                <p class="small text-muted mb-0">Xalqaro standartlar asosida tekshiruv orqali berilgan halol sertifikati</p>
+            </div>
+        </div>
+
+        <div class="cert-card shadow-sm border-0 rounded-4 p-3 bg-white text-center">
+            <div class="cert-img-container mb-3">
+                <img src="img/s.png" alt="SSV Sertifikati">
+            </div>
+            <div class="cert-body">
+                <h6 class="fw-bold text-dark mb-1">SSV Sertifikati</h6>
+                <p class="small text-muted mb-0">Sog'liqni saqlash vazirligi tomonidan tasdiqlangan sifat sertifikati</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+               <div class="container mt-5">
+    <footer class="pt-5 pb-4 border-top">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h5 class="fw-bold mb-4 text-dark">Bizni kuzatib boring</h5>
+                <div class="d-flex justify-content-center gap-4">
+                    <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon telegram"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="col-12 text-center">
+                <p class="text-muted small">© 2026 Oqtepa Lavash. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+        </footer>
+    </div>
+</div>
+    <script>
+        let cart = [];
+
+        function addToCart(btn) {
+            const card = btn.closest('.card-body');
+            const name = card.querySelector('.product-name').textContent;
+            const price = parseInt(card.querySelector('.product-price').textContent);
+            
+            cart.push({ name, price });
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('cart-count').textContent = cart.length;
+            const list = document.getElementById('cart-items-list');
+            let total = 0;
+            
+            if (cart.length === 0) {
+                list.innerHTML = '<p class="text-muted text-center py-3">Savat bo\'sh</p>';
+                document.getElementById('total-price').textContent = 0;
+                return;
+            }
+
+            list.innerHTML = '';
+            cart.forEach((item, index) => {
+                total += item.price;
+                list.innerHTML += `
+                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                        <span class="fw-semibold text-dark">${item.name}</span>
+                        <div>
+                            <span class="fw-bold text-danger me-3">${item.price.toLocaleString()} so'm</span>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="removeItem(${index})">❌</button>
+                        </div>
+                    </div>`;
+            });
+            document.getElementById('total-price').textContent = total.toLocaleString();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateUI();
+        }
+
+        function filterMenu(cat) {
+            const items = document.querySelectorAll('.product-item');
+            const btns = document.querySelectorAll('.sidebar-menu button');
+            
+            btns.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            items.forEach(i => {
+                i.style.display = (cat === 'all' || i.dataset.category === cat) ? 'block' : 'none';
+            });
+        }
+
+        function checkout() {
+            if (cart.length > 0) {
+                alert("Buyurtmangiz qabul qilindi! Jami: " + document.getElementById('total-price').textContent + " so'm");
+                cart = [];
+                updateUI();
+            } else {
+                alert("Savat bo'sh!");
+            }
+        }
+
+        checkout()
+        {
+            // Qidiruv funksiyasi
+document.getElementById('searchInput').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase(); // Kichik harfga o'tkazamiz
+    const products = document.querySelectorAll('.product-item'); // Barcha mahsulotlarni olamiz
+
+    products.forEach(product => {
+        const productName = product.querySelector('.product-name').textContent.toLowerCase();
+        
+        // Agar mahsulot nomi qidirilayotgan so'zga mos kelsa ko'rsatamiz, aks holda yashiramiz
+        if (productName.includes(searchTerm)) {
+            product.style.display = "block";
+        } else {
+            product.style.display = "none";
+        }
+    });
+});
+        }
+
+        function changeLocation() {
+    const newLoc = prompt("Yetkazib berish manzilini kiriting:");
+    if (newLoc) {
+        document.getElementById('user-location').textContent = newLoc;
+    }
+}
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

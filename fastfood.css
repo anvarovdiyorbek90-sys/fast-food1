@@ -1,0 +1,152 @@
+
+body {
+    background-color: #f8f9fb;
+    font-family: 'Inter', sans-serif;
+}
+
+.sidebar-menu .list-group-item {
+    border: none;
+    padding: 15px 20px;
+    font-weight: 500;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+
+.sidebar-menu .list-group-item:hover {
+    background-color: #fef1f2;
+    color: #dc3545;
+}
+
+.sidebar-menu .list-group-item.active {
+    background-color: white !important;
+    color: #dc3545 !important;
+    border-left: 5px solid #dc3545 !important;
+    font-weight: 800;
+}
+
+.product-card {
+    transition: 0.3s;
+    border: none;
+    background: white;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
+}
+
+.product-name {
+    font-size: 16px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.badge {
+    font-size: 11px;
+    z-index: 10;
+}
+
+.btn-close-white {
+    filter: invert(1);
+}
+
+#cart-count {
+    transition: 0.3s;
+}
+
+.cert-box {
+    width: 150px;
+    height: 150px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    transition: 0.3s;
+}
+.cert-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.cert-box:hover {
+    border-color: #dc3545;
+    transform: scale(1.05);
+}
+
+.sticky-sidebar {
+    position: sticky;
+    top: 90px;
+    height: fit-content;
+}
+
+
+.cert-card {
+    width: 280px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+}
+
+.cert-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.cert-img-container {
+    width: 100%;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.cert-img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+
+.cert-body h6 {
+    font-size: 17px;
+    letter-spacing: 0.5px;
+}
+
+.cert-body p {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #6c757d !important;
+}
+
+#h5{
+    text-align: center;
+}
+
+.social-icon {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 22px;
+    color: #333;
+    text-decoration: none;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+
+.social-icon:hover {
+    transform: scale(1.15);
+    color: white;
+}
+
+.instagram:hover { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); }
+.telegram:hover { background: #0088cc; }
+.youtube:hover { background: #ff0000; }
